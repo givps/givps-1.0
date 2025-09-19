@@ -1,0 +1,65 @@
+#!/bin/bash
+# =========================================
+# Quick Setup | Script Setup Manager
+# Edition : Stable Edition 1.2
+# Author  : givps
+# License : MIT
+# (C) Copyright 2023
+# =========================================
+
+set -euo pipefail
+
+# --- Install dependencies ---
+apt update -y && apt install -y jq curl wget
+
+# --- Cloudflare Configuration ---
+DOMAIN="givps.com"
+CF_ZONE_ID="53c3aca6f94d04b0742e82cf6891c02a"   # Ganti dengan Zone ID domain kamu
+CF_TOKEN="zs5NCxjmO-9lspqfhNfbF60aKCobdfKVQyYKZg65"   # Ganti dengan API Token kamu
+
+# --- Generate random numeric subdomain ---
+SUB=$(tr -dc 0-9 </dev/urandom | head -c5)
+SUB_DOMAIN="vpn${SUB}.${DOMAIN}"
+
+# --- Get VPS public IP ---
+IP=$(curl -s ipv4.icanhazip.com || wget -qO- ipv4.icanhazip.com)
+
+echo "🔄 Adding/Updating DNS record: ${SUB_DOMAIN} → ${IP}"
+
+# --- Check if DNS record already exists ---
+RECORD=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/dns_records?name=${SUB_DOMAIN}" \
+  -H "Authorization: Bearer ${CF_TOKEN}" \
+  -H "Content-Type: application/json" | jq -r .result[0].id)
+
+# --- If record does not exist, create new ---
+if [[ -z "$RECORD" || "${#RECORD}" -le 10 ]]; then
+  echo "🆕 Creating new DNS record..."
+  RECORD=$(curl -sLX POST "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/dns_records" \
+    -H "Authorization: Bearer ${CF_TOKEN}" \
+    -H "Content-Type: application/json" \
+    --data "{\"type\":\"A\",\"name\":\"${SUB_DOMAIN}\",\"content\":\"${IP}\",\"ttl\":120,\"proxied\":false}" \
+    | jq -r .result.id)
+else
+  echo "♻️ Updating existing DNS record..."
+fi
+
+# --- Update DNS record with current IP ---
+curl -sLX PUT "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/dns_records/${RECORD}" \
+  -H "Authorization: Bearer ${CF_TOKEN}" \
+  -H "Content-Type: application/json" \
+  --data "{\"type\":\"A\",\"name\":\"${SUB_DOMAIN}\",\"content\":\"${IP}\",\"ttl\":120,\"proxied\":false}" >/dev/null
+
+# --- Save results to config files ---
+for f in /root/domain /etc/xray/domain /etc/v2ray/domain /root/scdomain /root/xray/scdomain; do
+  mkdir -p "$(dirname "$f")"
+  echo "$SUB_DOMAIN" >"$f"
+done
+echo "IP=$SUB_DOMAIN" >/var/lib/ipvps.conf
+
+# --- Final output ---
+echo -e "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "✅ Subdomain successfully created:"
+echo "Host : $SUB_DOMAIN"
+echo "IP   : $IP"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+sleep 5
