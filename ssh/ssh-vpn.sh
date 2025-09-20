@@ -169,6 +169,11 @@ done
 netfilter-persistent save
 netfilter-persistent reload
 
+# ====== Install Ookla Speedtest-cli (universal) ======
+cd
+curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash
+sudo apt-get install speedtest
+
 # download semua menu (link tetap)
 cd /usr/bin
 wget -q -O menu "https://raw.githubusercontent.com/givps/givps-1.0/master/menu/menu.sh"
@@ -195,7 +200,7 @@ wget -q -O m-system "https://raw.githubusercontent.com/givps/givps-1.0/master/me
 wget -q -O m-domain "https://raw.githubusercontent.com/givps/givps-1.0/master/menu/m-domain.sh"
 wget -q -O add-host "https://raw.githubusercontent.com/givps/givps-1.0/master/ssh/add-host.sh"
 wget -q -O certv2ray "https://raw.githubusercontent.com/givps/givps-1.0/master/xray/certv2ray.sh"
-wget -q -O speedtest "https://raw.githubusercontent.com/givps/givps-1.0/master/ssh/speedtest_cli.py"
+# wget -q -O speedtest "https://raw.githubusercontent.com/givps/givps-1.0/master/ssh/speedtest_cli.py"
 wget -q -O auto-reboot "https://raw.githubusercontent.com/givps/givps-1.0/master/menu/auto-reboot.sh"
 wget -q -O restart "https://raw.githubusercontent.com/givps/givps-1.0/master/menu/restart.sh"
 wget -q -O bw "https://raw.githubusercontent.com/givps/givps-1.0/master/menu/bw.sh"
