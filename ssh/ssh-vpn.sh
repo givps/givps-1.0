@@ -208,7 +208,7 @@ wget -q -O m-tcp "https://raw.githubusercontent.com/givps/givps-1.0/master/menu/
 wget -q -O xp "https://raw.githubusercontent.com/givps/givps-1.0/master/ssh/xp.sh"
 wget -q -O m-dns "https://raw.githubusercontent.com/givps/givps-1.0/master/menu/m-dns.sh"
 
-#chmod +x /usr/bin/*
+# chmod +x /usr/bin/*
 # ====== Set Permission untuk script hasil wget ======
 chmod +x /usr/bin/menu \
           /usr/bin/m-vmess \
