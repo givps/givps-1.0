@@ -116,7 +116,7 @@ echo "   Domain     : $domain" | tee -a log-install.txt
 echo "   Public IP  : $ip_public" | tee -a log-install.txt
 echo "   SSL        : Installed via Certbot" | tee -a log-install.txt
 echo "============================================================" | tee -a log-install.txt
-echo "   OpenSSH      : 22" | tee -a log-install.txt
+echo "   OpenSSH      : 22/110" | tee -a log-install.txt
 echo "   Websocket    : 80 / 443" | tee -a log-install.txt
 echo "   Stunnel4     : 222, 777" | tee -a log-install.txt
 echo "   Nginx        : 81" | tee -a log-install.txt
