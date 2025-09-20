@@ -174,7 +174,7 @@ cd
 curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash
 sudo apt-get install speedtest
 
-# download semua menu (link tetap)
+# ====== Download Menu & SSH/Xray Scripts ======
 cd /usr/bin
 wget -q -O menu "https://raw.githubusercontent.com/givps/givps-1.0/master/menu/menu.sh"
 wget -q -O m-vmess "https://raw.githubusercontent.com/givps/givps-1.0/master/menu/m-vmess.sh"
@@ -208,7 +208,38 @@ wget -q -O m-tcp "https://raw.githubusercontent.com/givps/givps-1.0/master/menu/
 wget -q -O xp "https://raw.githubusercontent.com/givps/givps-1.0/master/ssh/xp.sh"
 wget -q -O m-dns "https://raw.githubusercontent.com/givps/givps-1.0/master/menu/m-dns.sh"
 
-chmod +x /usr/bin/*
+#chmod +x /usr/bin/*
+# ====== Set Permission untuk script hasil wget ======
+chmod +x /usr/bin/menu \
+          /usr/bin/m-vmess \
+          /usr/bin/m-vless \
+          /usr/bin/running \
+          /usr/bin/clearcache \
+          /usr/bin/m-ssws \
+          /usr/bin/m-trojan \
+          /usr/bin/m-sshovpn \
+          /usr/bin/usernew \
+          /usr/bin/trial \
+          /usr/bin/renew \
+          /usr/bin/hapus \
+          /usr/bin/cek \
+          /usr/bin/member \
+          /usr/bin/delete \
+          /usr/bin/autokill \
+          /usr/bin/ceklim \
+          /usr/bin/autokick \
+          /usr/bin/sshws \
+          /usr/bin/user-lockunlock \
+          /usr/bin/m-system \
+          /usr/bin/m-domain \
+          /usr/bin/add-host \
+          /usr/bin/certv2ray \
+          /usr/bin/auto-reboot \
+          /usr/bin/restart \
+          /usr/bin/bw \
+          /usr/bin/m-tcp \
+          /usr/bin/xp \
+          /usr/bin/m-dns
 
 # cron jobs
 cat > /etc/cron.d/re_otm <<-EOF
