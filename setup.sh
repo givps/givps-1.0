@@ -62,7 +62,7 @@ echo "2) Use Your Own Domain"
 read -rp "Choose [1/2]: " dns
 
 if [[ "$dns" == "1" ]]; then
-    wget -q https://raw.githubusercontent.com/givps/AutoScriptXray/master/ssh/cf \
+    wget -q https://raw.githubusercontent.com/givps/givps-1.0/master/ssh/cf \
       -O /root/cf && chmod +x /root/cf && bash /root/cf
 elif [[ "$dns" == "2" ]]; then
     read -rp "Enter Your Domain : " dom
@@ -84,13 +84,13 @@ certbot --nginx --non-interactive --agree-tos -m admin@$domain -d $domain || {
 }
 
 # --- Install Services ---
-wget -q https://raw.githubusercontent.com/givps/AutoScriptXray/master/ssh/ssh-vpn.sh \
+wget -q https://raw.githubusercontent.com/givps/givps-1.0/master/ssh/ssh-vpn.sh \
   -O /root/ssh-vpn.sh && chmod +x /root/ssh-vpn.sh && bash /root/ssh-vpn.sh
 
-wget -q https://raw.githubusercontent.com/givps/AutoScriptXray/master/xray/ins-xray.sh \
+wget -q https://raw.githubusercontent.com/givps/givps-1.0/master/xray/ins-xray.sh \
   -O /root/ins-xray.sh && chmod +x /root/ins-xray.sh && bash /root/ins-xray.sh
 
-wget -q https://raw.githubusercontent.com/givps/AutoScriptXray/master/sshws/insshws.sh \
+wget -q https://raw.githubusercontent.com/givps/givps-1.0/master/sshws/insshws.sh \
   -O /root/insshws.sh && chmod +x /root/insshws.sh && bash /root/insshws.sh
 
 # --- Auto Profile ---
