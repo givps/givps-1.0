@@ -116,9 +116,11 @@ echo "   Domain     : $domain" | tee -a log-install.txt
 echo "   Public IP  : $ip_public" | tee -a log-install.txt
 echo "   SSL        : Installed via Certbot" | tee -a log-install.txt
 echo "============================================================" | tee -a log-install.txt
-echo "   OpenSSH      : 22/110" | tee -a log-install.txt
+echo "   OpenSSH      : 22 / 110" | tee -a log-install.txt
 echo "   Websocket    : 80 / 443" | tee -a log-install.txt
 echo "   Stunnel4     : 222, 777" | tee -a log-install.txt
+echo "   Dropbear     : 109, 143" | tee -a log-install.txt
+echo "   Badvpn       : 7100-7900" | tee -a log-install.txt
 echo "   Nginx        : 81" | tee -a log-install.txt
 echo "   Vmess/Vless  : 80, 443, gRPC" | tee -a log-install.txt
 echo "   Trojan       : 80, 443, gRPC" | tee -a log-install.txt
